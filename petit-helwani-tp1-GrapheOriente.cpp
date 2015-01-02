@@ -35,9 +35,9 @@ void GrapheOriente::ajouterSommet(string nomSommet){
  */
 void GrapheOriente::ajouterArc(string nomSommetInitial,double value, string nomSommetTerminal){
 
-    // VERIFIE SI L'ARC QUE L'ON VEUT AJOUTER BOUCLE SUR LE MEME SOMMET
-    if(nomSommetInitial==nomSommetTerminal)
-        THROW_EXEPTION("Erreur imposible d'ajouter l'arc, ("+nomSommetInitial+","+toString(value)+","+nomSommetTerminal+"), car il bouble sur l'etat '"+nomSommetTerminal+"'.");
+    /// VERIFIE SI L'ARC QUE L'ON VEUT AJOUTER BOUCLE SUR LE MEME SOMMET
+    ///if(nomSommetInitial==nomSommetTerminal)
+       /// THROW_EXEPTION("Erreur imposible d'ajouter l'arc, ("+nomSommetInitial+","+toString(value)+","+nomSommetTerminal+"), car il bouble sur l'etat '"+nomSommetTerminal+"'.");
 
     // VERIFIER SI L'ARC EXISTE DEJA
     // BOUCLE POUR PARCOURIR LE VECTOR DES SOMMET DU GRAPHE
@@ -56,6 +56,19 @@ void GrapheOriente::ajouterArc(string nomSommetInitial,double value, string nomS
 
     listeDesArcs.back().getSommetExtremiteTerminale()->ajouterSommetPredecesseurDirect(listeDesArcs.back().getSommetExtremiteInitiale());
 
+
+
+}
+void GrapheOriente::modifierLaValeurDUnArcParRapportASontSommetInitiale(string nomSommetInitial,double value){
+
+    // CHERCHE LE SOMMET INITIALE DANS LA LISTE DES SOMMET DU GRAPHE
+    for (Sommet &sommet : listeDesSommets)
+        // SI LE SOMMET EST LES SOMMET INITIAL
+        if(sommet.getNom()==nomSommetInitial)
+            // PARCOURS LES ARCS DU SOMMET INITIAL
+            for(Arc *pArcDuSommet : sommet.getListePArcs())
+                // MODIFIE TOUT LES VALEURS DES ARCS DU SOMMET
+                pArcDuSommet->setValue(value);
 
 
 }

@@ -193,11 +193,15 @@ static inline GrapheOriente FermetureTransitive(GrapheOriente& grapheOriente){
     // COPIE DU GRAPHE ORIENTE
     GrapheOriente copyGrapheOriente(grapheOriente);
 
+    cout << "---------------------------------------------------" << endl;
+    cout << "-               FERMETURE TRANSIVE                -" << endl;
+    cout << "---------------------------------------------------" << endl;
+
     // BOUCLE POUR PARCOURIR TOUT LES SOMMETS DU GRAPHE
     for (Sommet & sommetDeLaCopyDuGraphe : copyGrapheOriente.getListeDesSommets() ){
 
         // CREATION D'UN VECTOR POUR RANGER TOUT LES SOMMET SUCCESSEUR DU SOMMET DU GRAPHE DE L'ITERATION COURANTE
-        vector<Sommet*> v_pSommetsDejaParcouruDuSommet;
+        list<Sommet*> v_pSommetsDejaParcouruDuSommet;
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         /// ON CHERCHE A RANGER DANS LE VECTOR, TOUTS LES SUCCESSSEUR DU SOMMET DE L'ITERATION COURANTE ///
@@ -226,16 +230,22 @@ static inline GrapheOriente FermetureTransitive(GrapheOriente& grapheOriente){
         while(!v_pSommetsDejaParcouruDuSommet.empty()){
 
             // SI LA TETE N'EST PAS DEJA SUCCESEUR DU SOMMET ON AJOUTE DES ARC
-            if(find(sommetDeLaCopyDuGraphe.getListePSommetsSuccesseurDirect().begin(), sommetDeLaCopyDuGraphe.getListePSommetsSuccesseurDirect().end(), v_pSommetsDejaParcouruDuSommet.front()) == sommetDeLaCopyDuGraphe.getListePSommetsSuccesseurDirect().end())
+            if(find(sommetDeLaCopyDuGraphe.getListePSommetsSuccesseurDirect().begin(), sommetDeLaCopyDuGraphe.getListePSommetsSuccesseurDirect().end(), v_pSommetsDejaParcouruDuSommet.front()) == sommetDeLaCopyDuGraphe.getListePSommetsSuccesseurDirect().end()){
+
+                /// [!!!] BOUCLE SUR LUI MEME
+                 ///if(sommetDeLaCopyDuGraphe.getNom() != v_pSommetsDejaParcouruDuSommet.front()->getNom() )
+
+                cout<< " > AJOUT D'UN ARC : " << sommetDeLaCopyDuGraphe.getNom() <<" -- "<< 0 <<" -> "<< v_pSommetsDejaParcouruDuSommet.front()->getNom()<< endl;
 
                 // CREATION D'UN ARC QUI RELIE LE SOMMET AVEC LES AUTRES SOMMET DU VECTEUR DES SOMMET SUCCESEUR
                 copyGrapheOriente.ajouterArc( sommetDeLaCopyDuGraphe.getNom(), 0, v_pSommetsDejaParcouruDuSommet.front()->getNom() );
+            }
 
             // pop front
             v_pSommetsDejaParcouruDuSommet.erase(v_pSommetsDejaParcouruDuSommet.begin());
         }
     }
-
+    cout << "---------------------------------------------------" << endl;
     return copyGrapheOriente;
 
 }

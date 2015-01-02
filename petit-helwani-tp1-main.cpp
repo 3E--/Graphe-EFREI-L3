@@ -66,6 +66,21 @@ int main(){
         // AFFICHAGE SUR LA CONSOLE LES SOMMETS APRES LE CALCUL DE RANG (SI LE GRAPHE N'A PAS DE CIRCUIT) DU GRAPHE ORIENTE GENERER A PARTIR DU FICHIER
         AlgorithmesGraphe::Affichage::listeDesSommets(grapheOriente1);
 
+
+
+            GrapheOriente grapheOriente3 = AlgorithmesGraphe::FermetureTransitive(grapheOriente1);
+            cout <<endl<< " le resultat de la fermeture transitive :"<<endl;
+
+             // AFFICHAGE SUR LA CONSOLE DE LA MATRICE ADJACENTE DU GRAPHE ORIENTE GENERER A PARTIR DU FICHIER
+             AlgorithmesGraphe::Affichage::matriceAdjacente(grapheOriente3);
+             cout<<endl<<endl;
+
+             // AFFICHAGE SUR LA CONSOLE LES ARCS DU GRAPHE ORIENTE GENERER A PARTIR DU FICHIER
+             AlgorithmesGraphe::Affichage::listeDesArcs(grapheOriente3);
+             cout<<endl<<endl;
+
+
+
         cout<<endl<<endl;
         /** ***************************
           * TRAITEMENT DU FICHIER 2
@@ -109,22 +124,22 @@ int main(){
         AlgorithmesGraphe::Affichage::listeDesSommets(grapheOriente2);
 
         /// ETAPE 6
-        /*
+
         if(!circuit2.getListeDesSommets().empty()) {
 
-            GrapheOriente grapheOriente3 = FermetureTransitive::faire(grapheOriente2);
+            GrapheOriente grapheOriente3 = AlgorithmesGraphe::FermetureTransitive(grapheOriente2);
             cout <<endl<< " le résultat de lafermeture transitive :"<<endl;
 
              // AFFICHAGE SUR LA CONSOLE DE LA MATRICE ADJACENTE DU GRAPHE ORIENTE GENERER A PARTIR DU FICHIER
-             Affichage::matriceAdjacente(grapheOriente3);
+             AlgorithmesGraphe::Affichage::matriceAdjacente(grapheOriente3);
              cout<<endl<<endl;
 
              // AFFICHAGE SUR LA CONSOLE LES ARCS DU GRAPHE ORIENTE GENERER A PARTIR DU FICHIER
-             Affichage::listeDesArcs(grapheOriente3);
+             AlgorithmesGraphe::Affichage::listeDesArcs(grapheOriente3);
              cout<<endl<<endl;
 
         }
-        */
+
         const auto t2 = high_resolution_clock::now();
         cout << duration_cast<nanoSecondes>(t2 - t1).count() << " nanosecondes\n";
 

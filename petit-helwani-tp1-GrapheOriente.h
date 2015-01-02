@@ -28,6 +28,7 @@ public:
     ~GrapheOriente();
      void ajouterSommet(string nomSommet);
      void ajouterArc(string nomSommetInitial,double value, string nomSommetTerminal);
+      void modifierLaValeurDUnArcParRapportASontSommetInitiale(string nomSommetInitial,double value);
      Sommet &getSommetByName(string nomSommet);
 
 
