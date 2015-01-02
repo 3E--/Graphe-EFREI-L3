@@ -21,16 +21,12 @@ SOURCES += \
     petit-helwani-tp1-Arc.cpp \
     petit-helwani-tp1-GrapheOriente.cpp \
     petit-helwani-tp1-main.cpp \
-    petit-helwani-tp1-Sommet.cpp \
-    FermetureTransitive.cpp \
-    LectureDeFichierDeContrainte.cpp
+    petit-helwani-tp1-Sommet.cpp
 
 HEADERS += \
     petit-helwani-tp1-GrapheOriente.h \
     petit-helwani-tp1-Exeption.h \
     petit-helwani-tp1-Arc.h \
     petit-helwani-tp1-Sommet.h \
-    FermetureTransitive.h \
-    LectureDeFichierDeContrainte.h \
     petit-helwani-tp1-AlgorithmesGraphe.h \
     petit-helwani-tp1-LectureFichier.h
