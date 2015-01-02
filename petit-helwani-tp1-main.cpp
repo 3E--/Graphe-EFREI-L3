@@ -30,6 +30,7 @@ int main(){
         /** ***************************
           * TRAITEMENT DU FICHIER 1
           * **************************/
+
         cout << "LECTURE DU FICHIER " <<pathFichierGraphe1 <<endl;
         const auto t1 = high_resolution_clock::now();
 

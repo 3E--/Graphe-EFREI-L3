@@ -47,11 +47,12 @@ static inline  void listeDesArcs(GrapheOriente &grapheOriente){
 
     cout << "-----------------------------------------" << endl;
     cout << "-             LISTE DES ARCS            -" << endl;
-    cout << "-----------------------------------------" << endl;
+    cout << "-----------------------------------------" << endl << endl;
+    cout << "( extrémité initiale , extrémité terminale , valeur )"<<endl;
     // BOUCLE POUR PARCOURIR LE VECTOR DES SOMMET DU GRAPHE
     for (Arc &arc : grapheOriente.getListeDesArcs())
         cout<<"("<<arc.getSommetExtremiteInitiale()->getNom()<<","<< arc.getSommetExtremiteTerminale()->getNom() <<","<<toString(arc.getValue())<<")"<<endl;
-    //( extrémité initiale , extrémité terminale , valeur )
+
     cout << "-----------------------------------------" << endl;
  }
  /**
