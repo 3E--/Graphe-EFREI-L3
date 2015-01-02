@@ -1,0 +1,12 @@
+INPUT(
+./release\petit-helwani-tp1-Arc.o
+./release\petit-helwani-tp1-CalculDeRang.o
+./release\petit-helwani-tp1-DetectionDeCircuit.o
+./release\petit-helwani-tp1-GrapheFileReader.o
+./release\petit-helwani-tp1-GrapheOriente.o
+./release\petit-helwani-tp1-main.o
+./release\petit-helwani-tp1-Sommet.o
+./release\FermetureTransitive.o
+./release\petit-helwani-tp1-Affichage.o
+./release\LectureDeFichierDeContrainte.o
+);
