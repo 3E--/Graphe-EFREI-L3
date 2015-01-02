@@ -147,8 +147,7 @@ debug/petit-helwani-tp1-main.o: petit-helwani-tp1-main.cpp petit-helwani-tp1-Lec
 		petit-helwani-tp1-Sommet.h \
 		petit-helwani-tp1-Exeption.h \
 		petit-helwani-tp1-Arc.h \
-		petit-helwani-tp1-AlgorithmesGraphe.h \
-		FermetureTransitive.h
+		petit-helwani-tp1-AlgorithmesGraphe.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\petit-helwani-tp1-main.o petit-helwani-tp1-main.cpp
 
 debug/petit-helwani-tp1-Sommet.o: petit-helwani-tp1-Sommet.cpp petit-helwani-tp1-Sommet.h \

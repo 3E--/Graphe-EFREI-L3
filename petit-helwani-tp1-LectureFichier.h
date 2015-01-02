@@ -148,7 +148,8 @@ static  inline GrapheOriente  graphe(string &path){
  * @param path
  *
     *
-    *               EXEMPLE -------------------
+    *               DEBUT EXEMPLE -------------------
+    *
     *               SOMMETS:[
     *                          1,
     *                          2,
@@ -159,9 +160,12 @@ static  inline GrapheOriente  graphe(string &path){
     *                      [1, 10, 2],
     *                      [2, 20, 3],
     *                      [3, 20],
-    *                      [4, 40, [1,2,3]]
+    *                      [4, 40, 1, 2, 3]
     *               }
-    *               ---------------------------
+    *
+    *               FIN EXAMPLE ----------------------
+    *
+    *  !!! NOTE : la fonction vas automatiquement ajouter les sommet « début des travaux » et sommet « fin des travaux » qui sont restpectivement 0 et 5 dans l'example ci dessus
     *
  *
  * @return
@@ -179,7 +183,10 @@ static inline GrapheOriente contrainte(string &path){
             char chars[]=" \r\n\t";
             for(char oneChar : chars)
                 graphText.erase (std::remove(graphText.begin(), graphText.end(), oneChar), graphText.end());
-            
+
+            /// //////////////////////////////////////////////////////////
+            /// TRAITEMENTS DE LA LISTE DES SOMMET DU FICHIER CONTRAINTE
+            /// //////////////////////////////////////////////////////////
             // CHERCHE LA POSITION DU MARQUEUR "SOMMETS:[ 1,2 ]"
             //                                  ^^^^^^^^^
             size_t posBeginSommet=graphText.find("SOMMETS:[");
@@ -199,18 +206,31 @@ static inline GrapheOriente contrainte(string &path){
             graphText.erase(posBeginSommet,posEndSommet-posBeginSommet+1);
             
             GrapheOriente graphe;
+
+            ///////////////////////////////////////////////
+            /// SOMMET « début des travaux »
+            ///////////////////////////////////////////////
+
+            /// AJOUTE LE SOMMET 0 : sommet « début des travaux »
             graphe.ajouterSommet("0");
             size_t posSplitVirguleSommets = 0;
             
             // BOUCLE PARCOUR SPLITER LES SOMMET A PARTIR DU MARQUEUR "1,2"
             //                                                          ^
             while (( posSplitVirguleSommets = sommetsText.find(",")) != std::string::npos) {
+
+                // AJOUTE LES SOMMET DE LA LISTE DES SOMMET SAUF LE DERNIER SOMMET (celui qui n'a pas de virgule sa declaration dans le fichier texte)
                 graphe.ajouterSommet(sommetsText.substr(0, posSplitVirguleSommets));
+
                 sommetsText.erase(0, posSplitVirguleSommets + 1); // +1 : longeur du delimiteur
             }
-            // AJOUTE LE DERNIER SOMMET
+
+            // AJOUTE LE DERNIER SOMMET DE LA LISTE DES SOMMETS
              graphe.ajouterSommet(sommetsText.substr(0, posSplitVirguleSommets));
 
+             /////////////////////////////////////////////////
+             /// TRAITEMENT DES ARCS DU FICHIER DE CONTRAINTE
+             /// /////////////////////////////////////////////
              /*
               * graphText:
 
@@ -283,7 +303,10 @@ static inline GrapheOriente contrainte(string &path){
 
                 if(vStringArc.size()==2){
                     cout<<" Aucune contrainte, elle sera relié au sommet 0.";
-                    graphe.ajouterArc("0",0,vStringArc[0]);
+
+                    /// AJOUTE UN ARC ENTRE LE SOMMET  0  : sommet « début des travaux » ET LE SOMMET QUI N'A PAS DE CONTRAINTE
+                    graphe.ajouterArc(toString(atoi(graphe.getListeDesSommets().front().getNom().c_str())-1),0,vStringArc[0]);
+
                 }
                 else{
                     cout<<" Elle ne peut s’exécuter que lorsque la tâche ";
@@ -336,7 +359,9 @@ static inline GrapheOriente contrainte(string &path){
 
             if(vStringArc.size()==2){
                 cout<<" Aucune contrainte, elle sera relié au sommet 0.";
-                graphe.ajouterArc("0",0,vStringArc[0]);
+
+                /// AJOUTE UN ARC ENTRE LE SOMMET  0  : sommet « début des travaux » ET LE SOMMET QUI N'A PAS DE CONTRAINTE
+                graphe.ajouterArc(toString(atoi(graphe.getListeDesSommets().front().getNom().c_str())-1),0,vStringArc[0]);
             }
             else{
                 cout<<" Elle ne peut s’exécuter que lorsque la tâche ";
@@ -355,16 +380,31 @@ static inline GrapheOriente contrainte(string &path){
                 cout<<" est terminée.";
             }
 
-            /** ***************************
-            // AJOUTE LES CONTRAINTES DE TEMPS DES ARC
-            *******************************/
+            ///////////////////////////////////////////////
+            /// SOMMET « fin des travaux »
+            ///////////////////////////////////////////////
+
+            /// AJOUTE LE DERNIER SOMMET:  « fin des travaux », son nom c'est : (le numero de la derniére tache) + 1
+            graphe.ajouterSommet(toString(atoi(graphe.getListeDesSommets().back().getNom().c_str())+1));
+
+            /// AJOUT DE L'ARC QUI RELIE LA DERNIERE TACHE AVEC LE SOMMET « fin des travaux »
+            graphe.ajouterArc(graphe.getListeDesSommets().back().getNom(), 0, toString(atoi(graphe.getListeDesSommets().back().getNom().c_str())+1));
+
+            ///////////////////////////////////////////////
+            /// AJOUTE LES CONTRAINTES DE TEMPS DES ARC
+            ///////////////////////////////////////////////
             for (pair<string,double>  keyAndValueMap : dureeDExecutiondesSommets)
                 graphe.modifierLaValeurDUnArcParRapportASontSommetInitiale(keyAndValueMap.first, keyAndValueMap.second);
 
             return graphe;
     
 }
-
+/**
+ * @brief toString
+ * @param number
+ * @return
+ */
+static inline string toString(const double &number){ostringstream s;s << number;return s.str();}
 }
 
 #endif // GRAPHEFILEREADER_H

@@ -15,7 +15,7 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 CONFIG += c++11
-CONFIG += gnu11
+
 
 SOURCES += \
     petit-helwani-tp1-Arc.cpp \

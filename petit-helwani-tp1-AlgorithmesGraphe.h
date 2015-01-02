@@ -32,7 +32,7 @@ static inline void matriceAdjacente(const GrapheOriente &grapheOriente){
     cout << "---------------------------------------------------" << endl;
     for (unsigned int x = 0; x < Vector2D.size(); x++) {
         for (unsigned int y = 0; y < Vector2D.at(x).size(); y++)
-            cout<< Vector2D.at(x).at(y)<<b.substr(0,b.size()-Vector2D.at(x).at(y).size()+1)<<"|";
+            cout<< Vector2D.at(y).at(x)<<b.substr(0,b.size()-Vector2D.at(x).at(y).size()+1)<<"|";
         cout<<endl<< "---------------------------------------------------" <<endl;
     }
     cout << "---------------------------------------------------" << endl;

@@ -146,7 +146,7 @@ int main(){
           * **************************/
 
         // CREATION D'UN OBJECT QUI REPRESENTE UN GRAPHE ORIENTE EN MEMOIRE A PARTIR D'UN FICHIER REPRESENTANT UN GRAPHE
-        //GrapheOriente grapheOriente4 = LireFichier::contrainte(pathFichierGraphe1);
+        GrapheOriente grapheOriente4 = LireFichier::contrainte(pathFichierGraphe3);
 
         const auto t2 = high_resolution_clock::now();
 

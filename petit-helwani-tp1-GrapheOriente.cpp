@@ -107,8 +107,6 @@ vector< vector<string> > GrapheOriente::genererLaMatriceAdjacente() const{
         // AJOUTE LE NOM DE CHAQUE SOMMET DU GRAPHE DANS LA PREMIERE LIGGNE DE LA MATRICE
         ligneHeader.push_back(sommet.getNom());
 
-
-
     // AJOUTE LA PREMIERE LIGNE DE LA MATRICE
     matriceAdjacente.push_back(ligneHeader);
 
